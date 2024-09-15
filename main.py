@@ -8,7 +8,13 @@ import os
 from io import BytesIO
 import time
 
-os.environ['GROQ_API_KEY'] = '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'
+from dotenv import load_dotenv
+load_dotenv()
+
+
+# os.environ['GROQ_API_KEY'] = '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'
+groq_api_key = os.getenv('GROQ_API_KEY')
+os.environ['GROQ_API_KEY'] = groq_api_key
 client = Groq()
 llava_model = 'llava-v1.5-7b-4096-preview'
 
@@ -46,7 +52,7 @@ if st.button("Process"):
 
         # image_path = os.path.abspath('downloaded_image.jpg')
         image_path = save_path
-        print(image_path)
+        # print(image_path)
 
         with open(image_path, "rb") as image_file:
             base64_image = base64.b64encode(image_file.read()).decode('utf-8')
